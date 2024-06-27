@@ -1,0 +1,35 @@
+[33mcommit 7559e365d03b65f203b802a42ffb6b3a2013d653[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Siddharth Nema <siddharthnema2308@gmail.com>
+Date:   Mon Mar 29 19:21:43 2021 +0530
+
+    Survey Creation Functionality Introduced
+
+[33mcommit b7a9b2d25caeaa0c9eff6da6fc302ffb88d868b4[m
+Author: Siddharth Nema <siddharthnema2308@gmail.com>
+Date:   Sun Feb 28 17:15:39 2021 +0530
+
+    Code Refactored
+
+[33mcommit 372a5d03b8054571d30f5609b524ff097f9cd8f7[m
+Author: Siddharth Nema <siddharthnema2308@gmail.com>
+Date:   Thu Feb 25 16:44:34 2021 +0530
+
+    Dashboard page added
+
+[33mcommit 8edd941a47304c3b4ba16d8c780610aa400fcdf9[m
+Author: Siddharth Nema <siddharthnema2308@gmail.com>
+Date:   Sat Feb 6 16:24:18 2021 +0530
+
+    NavButtons added and bugs fixed
+
+[33mcommit 0e21ce673a300246281eff6fd667621fbfa7bad3[m
+Author: Siddharth Nema <siddharthnema2308@gmail.com>
+Date:   Tue Feb 2 16:26:10 2021 +0530
+
+    Initial Commit
+
+[33mcommit 18fa327188a6f82df8d1d3377827b9fe46ae5580[m
+Author: Siddharth Nema <siddharthnema2308@gmail.com>
+Date:   Tue Jan 26 15:24:27 2021 +0530
+
+    Initialize project using Create React App

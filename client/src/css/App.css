@@ -1,0 +1,242 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.App {
+  text-align: center;
+}
+
+.Header {
+  background-color: rgba(7, 0, 31, 0.932);
+  margin: 0;
+  text-align: left;
+  position: fixed;
+  width: 100%;
+}
+
+.Header h1 {
+  margin: 0;
+  padding: 12px 0.5em;
+  color: white;
+}
+
+.body {
+  padding-top: 71px;
+}
+
+.thankyou-text {
+  padding-top: 75px;
+  font-size: 64px;
+}
+
+.return-button {
+  margin-top: 50px;
+}
+
+.SurveyConsole {
+  text-align: left;
+  padding: 3em 5em;
+  margin-left: 200px;
+}
+
+p {
+  margin: 0;
+}
+
+hr {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.addSurveybtn {
+  float: right;
+  margin-top: 3em;
+  background-color: rgba(7, 0, 31, 0.932);
+  color: white;
+}
+
+.addSurveybtn:hover {
+  color: white;
+  background-color: rgba(17, 0, 71, 0.932);
+}
+
+.SurveyCreator {
+  padding: 1em 10em;
+}
+
+/***QuestionCreator***/
+.QuestionCreator {
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5em;
+  margin: 2.5em 200px;
+  text-align: left;
+}
+
+.Options {
+  padding: 20px 80% 10px 0em;
+}
+
+.OptionCreator {
+  padding: 5px 10em 5px 0em;
+  text-align: left;
+}
+
+.surveyTitle {
+  text-align: left;
+  padding: 10px 350px;
+}
+
+.addQuestionCreatorButton {
+  margin: 5px;
+  height: 50px;
+  width: 100px;
+  background-color: rgba(7, 0, 31, 0.932);
+  color: white;
+}
+
+.submitButton {
+  display: block;
+  float: right;
+}
+
+/******Question*******/
+.Question {
+  padding: 2em;
+  width: 50%;
+  display: inline-block;
+}
+
+.Question h2 {
+  text-align: left;
+}
+
+.Question h3 {
+  text-align: left;
+  padding: 0.5em 0;
+}
+
+/******Option********/
+.OptionsHolder {
+  text-align: left;
+  margin: 5px ;
+}
+
+.Option {
+  width: 50%;
+}
+
+.Option:focus {
+  background-color: black;
+  color: white;
+}
+
+/*****NavButton****/
+.NavButton {
+  display: inline-block;
+  margin: 2.5px;
+}
+
+.QuestionResult {
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5em;
+  margin: 2.5em 200px;
+  text-align: left;
+}
+
+.Choices {
+  margin: 0 2em;
+  display: inline;
+}
+
+.QuestionTitle {
+  margin: 0.5em;
+}
+
+.UserDashboard {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/************************COMPONENTS************************/
+.SidebarMenu {
+  background-color: rgba(7, 0, 31, 0.836);
+  width: 200px;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.SidebarMenu-Links {
+  text-decoration: none;
+  color: white;
+  height: 2.5em;
+  margin: 5px;
+  padding: 24px 5px;
+  display: flex;
+  align-items: center;
+}
+
+.SidebarMenu-Links:hover {
+  color: white;
+  background-color: rgba(7, 0, 31, 0.932);
+}
+
+.DashboardView {
+  margin-left: 200px;
+}
+
+/************************VIEWS************************/
+.Home {
+  padding: 2em 4em;
+  text-align: left;
+}
+
+/*************VIEW-SPECIFIC COMPONENTS*****************/
+
+/*****HOME*****/
+.HomePageHeading {
+  font-size: 36px;
+}
+
+.SurveysList {
+  overflow: hidden;
+  margin: 1em;
+  display: flex;
+  flex-direction: row;
+}
+
+.SurveyTile {
+  margin: 1em 1em;
+  padding: 1em;
+  width: 17.5em;
+  height: 10em;
+  text-align: left;
+  position: relative;
+}
+
+.OpenSurveyButton {
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+  border: 1px solid rgba(7, 0, 31, 0.932);
+}
+
+.OpenSurveyButton:hover {
+  background-color: rgba(7, 0, 31, 0.932);
+  color: white;
+}
