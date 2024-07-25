@@ -74,6 +74,22 @@ surveys.get("/getSurvey", function (req, res) {
   });
 });
 
+surveys.delete("/:id", function (req, res) {
+  // Delete a survey
+  const surveyId = req.params.id;
+
+  Survey.findByIdAndDelete(surveyId, function (err, deletedSurvey) {
+    if (err) {
+      console.log(err);
+      res.status(500).json({ error: "Failed to delete survey" });
+    } else if (!deletedSurvey) {
+      res.status(404).json({ error: "Survey not found" });
+    } else {
+      res.json({ message: "Survey deleted successfully" });
+    }
+  });
+});
+
 surveys.get("/generateResults", function(req, res) {
   console.log(req.query.id + " - ID");
   Survey.findById(req.query.id, function (err, foundSurvey) {

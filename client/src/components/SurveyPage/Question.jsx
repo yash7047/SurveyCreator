@@ -19,7 +19,7 @@ function Question(props) {
 
     return <div className='Question'>
         <h2>Question {props.questionIndex + 1}</h2>
-        <h3>{props.source.title}</h3>
+        {/* <h3>{props.source.title}</h3> */}
         {
             props.source.options.map(
                 (option, index) => <Option source={option} key={index} id={index}

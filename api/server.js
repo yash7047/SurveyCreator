@@ -1,11 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require('cors');
 
 const dbName = "survey_manager";
 
 var app = (module.exports = express());
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect("mongodb://0.0.0.0:27017/" + dbName, {
   useNewUrlParser: true,
@@ -21,8 +23,11 @@ mongoose.connection.on("open", function () {
   console.log("Successfully Connected");
 });
 
+app.use(cors());
+
 app.use("/api/surveys", require("./routes/surveys"));
 app.use("/api/users", require("./routes/users").users);
+app.use("/account", require("./routes/account"));
 
 app.get("/", function (req, res) {
   res.send("Server is working");

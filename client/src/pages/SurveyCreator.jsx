@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import QuestionCreator from "../components/SurveyCreator/QuestionCreator";
 import { storeSurvey } from "../service/BackendService";
 import { FaPlus } from "react-icons/fa";
 import { v4 as generateId } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 function SurveyCreator() {
-  var history = useHistory();
+  var history = useNavigate();
   const [title, setTitle] = useState("");
   var [questionList, setQuestionListN] = useState([]);
 
@@ -21,6 +21,9 @@ function SurveyCreator() {
   }
 
   function submitSurvey() {
+    if(questionList.length == 0) {
+      return;
+    }
     var createdSurvey = {
       _id: generateId(),
       title: title,
@@ -33,8 +36,7 @@ function SurveyCreator() {
       .catch((e) => {
         console.log(e);
       });
-
-    history.push("/dashboard");
+      history("/dashboard");
   }
 
   function handleTitleChange(event) {
@@ -60,17 +62,10 @@ function SurveyCreator() {
       {questionList.map((question, index) => (
         <QuestionCreator key={index} question={question} />
       ))}
-      <button
-        className="btn btn-info addQuestionCreatorButton"
-        onClick={addQuestionCreator}
-      >
-        <FaPlus />
-        <span>Add</span>
+      <button className="btn btn-info addQuestionCreatorButton" onClick={addQuestionCreator}>
+        <FaPlus /><span>Add</span>
       </button>
-      <button
-        className="submitButton btn btn-outline-success"
-        onClick={submitSurvey}
-      >
+      <button className="submitButton btn btn-outline-success" onClick={submitSurvey}>
         Submit
       </button>
     </div>

@@ -1,6 +1,7 @@
 import SurveysList from "./HomeComponents/SurveysList";
 import { getSurveys } from "../../../../service/BackendService";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [surveys, setSurveys] = useState([]);
@@ -17,7 +18,12 @@ function Home() {
 
   return (
     <div className="Home">
-      <h1 className="HomePageHeading">Surveys you might like</h1>
+      <div>
+        <h1 className="HomePageHeading">Surveys you might like</h1>
+        <Link to="/create-survey">
+          <button className="btn btn-large addSurveybtn">Add Survey</button>
+        </Link>
+      </div>
       <SurveysList surveys={surveys} />
     </div>
   );

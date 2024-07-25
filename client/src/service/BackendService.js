@@ -25,6 +25,26 @@ export async function storeResponse(response) {
   });
 }
 
+export async function deleteSurveyById(id) {
+  try {
+    const response = await fetch(`/api/surveys/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete survey");
+    }
+
+    return await response.json(); // Return the response as JSON
+  } catch (error) {
+    console.error("Error:", error.message);
+    throw error; // Rethrow the error for handling in the calling code
+  }
+}
+
 // export async function getSurveyById(id) {
 //   const response = await fetch("/api/surveys/getSurvey?id=" + id);
 //   return await response.json();

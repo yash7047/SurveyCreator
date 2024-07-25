@@ -10,6 +10,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+th, tr {text-align: center;}
 
 .App {
   text-align: center;
@@ -46,6 +47,7 @@ code {
   text-align: left;
   padding: 3em 5em;
   margin-left: 200px;
+  overflow-y: auto;
 }
 
 p {
@@ -56,12 +58,13 @@ hr {
   margin-top: 50px;
   margin-bottom: 50px;
 }
-
+.cp {cursor: pointer;}
 .addSurveybtn {
-  float: right;
-  margin-top: 3em;
+  top: 18%;
+  position: absolute;
   background-color: rgba(7, 0, 31, 0.932);
   color: white;
+  right: 10%;
 }
 
 .addSurveybtn:hover {
@@ -222,7 +225,7 @@ hr {
 
 .SurveyTile {
   margin: 1em 1em;
-  padding: 1em;
+  padding: 0 1em;
   width: 17.5em;
   height: 10em;
   text-align: left;
