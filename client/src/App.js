@@ -10,9 +10,13 @@ import SidebarMenu from "./components/DashboardPage/SidebarMenu";
 import LoginComponent from "./pages/LoginComponent";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import authenticatorClient from "./service/authenticator-api-client";
+import { useState } from "react";
 
 function App() {
 
+  const [loginCred, updateLoginCred] = useState({
+    username: '', password: ''
+  })
   const SecuredRoute = ({ children }) => {
       let location = useLocation();
 
@@ -25,26 +29,26 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header loginCred={loginCred} />
       <div className="body">
         <Router>
-          <SidebarMenu />
+          
           <Routes>
             {/* Redirect from "/" to "/dashboard" */}
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
             {/* Use element instead of component */}
-            <Route path="/dashboard" element={<UserDashboard />} />
+            <Route path="/dashboard" element={<SecuredRoute><UserDashboard loginCred={loginCred} /></SecuredRoute>} />
             <Route path="/survey-console" element={<SurveyConsole />} />
-            <Route path="/survey" element={<SecuredRoute><Survey /></SecuredRoute>} />
-            <Route path="/create-survey" element={<SecuredRoute><SurveyCreator /></SecuredRoute>} />
+            <Route path="/survey" element={<Survey loginCred={loginCred} />} />
+            <Route path="/create-survey" element={<SurveyCreator />} />
             <Route path="/survey-result" element={<SurveyResult />} />
             <Route path="/submission" element={<SubmissionPage />} />
 
             {/* Secure route example */}
             {/* <Route path="/admin" element={<SecuredRoute><AdminComponent /></SecuredRoute>} /> */}
 
-            <Route path="login" element={<LoginComponent />} />
+            <Route path="login" element={<LoginComponent updateLoginCred={updateLoginCred} />} />
           </Routes>
         </Router>
       </div>

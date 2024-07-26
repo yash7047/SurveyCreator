@@ -4,6 +4,7 @@ import { storeSurvey } from "../service/BackendService";
 import { FaPlus } from "react-icons/fa";
 import { v4 as generateId } from "uuid";
 import { useNavigate } from "react-router-dom";
+import SidebarMenu from "../components/DashboardPage/SidebarMenu";
 
 function SurveyCreator() {
   const navigate = useNavigate(); // Updated from var to const
@@ -23,6 +24,7 @@ function SurveyCreator() {
 
   const submitSurvey = () => {
     if (questionList.length === 0 || title.length === 0) {
+      console.log("Title or questions are missing.");
       return;
     }
     const createdSurvey = {
@@ -32,11 +34,11 @@ function SurveyCreator() {
     };
     storeSurvey(createdSurvey)
       .then((data) => {
-        console.log(data);
+        console.log("Survey saved successfully:", data);
         navigate("/dashboard");
       })
       .catch((e) => {
-        console.log(e);
+        console.error("Error storing survey:", e);
       });
   };
 
@@ -45,6 +47,8 @@ function SurveyCreator() {
   };
 
   return (
+    <>
+    <SidebarMenu />
     <div className="SurveyCreator">
       <h1>You are at Survey Creator page</h1>
 
@@ -80,6 +84,7 @@ function SurveyCreator() {
         Submit
       </button>
     </div>
+    </>
   );
 }
 

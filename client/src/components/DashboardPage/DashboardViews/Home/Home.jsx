@@ -3,7 +3,7 @@ import { getSurveys } from "../../../../service/BackendService";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function Home() {
+function Home({ loginCred }) {
   const [surveys, setSurveys] = useState([]);
 
   useEffect(() => {
@@ -20,9 +20,9 @@ function Home() {
     <div className="Home">
       <div>
         <h1 className="HomePageHeading">Surveys you might like</h1>
-        <Link to="/create-survey">
+        {loginCred.username == "manish" && <Link to="/create-survey">
           <button className="btn btn-large addSurveybtn">Add Survey</button>
-        </Link>
+        </Link>}
       </div>
       <SurveysList surveys={surveys} />
     </div>

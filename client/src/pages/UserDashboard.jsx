@@ -1,13 +1,18 @@
 import React from "react";
 import Home from "../components/DashboardPage/DashboardViews/Home/Home";
+import SidebarMenu from "../components/DashboardPage/SidebarMenu";
 
-function UserDashboard() {
+function UserDashboard({ loginCred }) {
   return (
-    <div className="UserDashboard">
-      <div className="DashboardView">
-        <Home />
-      </div>
-    </div>
+    <>
+        <SidebarMenu />
+        <div className="UserDashboard">
+          <div className="DashboardView">
+            <Home loginCred={loginCred} />
+          </div>
+        </div>
+    </>
+    
   );
 }
 

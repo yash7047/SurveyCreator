@@ -3,7 +3,8 @@ import { Form, Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import authenticatorClient from '../service/authenticator-api-client';
 
-const LoginComponent = ({state}) => {
+const LoginComponent = ({ state, updateLoginCred }) => {
+    
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -21,6 +22,7 @@ const LoginComponent = ({state}) => {
             .then(() => {
                 const { from } = location.state;
                 navigate(from.pathname, from);
+                updateLoginCred({ username: username, password: password })
             })
             .catch((eMsg) => {
                 setMessage(eMsg);
@@ -64,7 +66,7 @@ const LoginComponent = ({state}) => {
 
     return (
         <div className='row'>
-            <h1 className="text-primary text-center">Login Component</h1>
+            <h1 className="text-primary text-center">Login/SignUp</h1>
 
             {message && <h4 className="alert alert-danger">{message}</h4>}
 
@@ -100,7 +102,7 @@ const LoginComponent = ({state}) => {
                         disabled={!formValid}
                         style={!formValid ? { cursor: 'not-allowed', pointerEvents: 'all' } : {}}
                     >
-                        Login
+                        Submit
                     </Button>
                 </Form>
             </div>

@@ -14,8 +14,13 @@ function SurveyTableRow(props) {
 
   const deleteSurvey = (event) => {
     event.stopPropagation()
-    deleteSurveyById(props.survey._id)
-      .then(res => alert(res.message))
+    if(window.confirm('Are you sure you want to delete this survey?')){
+      deleteSurveyById(props.survey._id)
+      .then((res) => alert(res.message))
+    }
+    else {
+      console.log("cancel click")
+    }
   }
 
   return (

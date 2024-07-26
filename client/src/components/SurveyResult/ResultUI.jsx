@@ -1,16 +1,20 @@
 import QuestionResult from "./QuestionResult";
+
 function ResultUI(props) {
+  const { survey, results } = props;
 
   return (
     <div>
-      <h1>{props.survey.survey.title}</h1>
-      {
-        props.survey.survey.questions.map((question, index) => {
-          return (
-            <QuestionResult question={question} result={props.results[index]} />
-          )
-        }) 
-      }
+      <h1>{survey.survey.title}</h1>
+      {survey.survey.questions.map((question, index) => {
+        return (
+          <QuestionResult
+            key={index}
+            question={question}
+            result={results[index]}
+          />
+        );
+      })}
     </div>
   );
 }

@@ -4,25 +4,47 @@ export async function getSurveys() {
 }
 
 export async function storeSurvey(survey) {
-  const response = await fetch("/api/surveys/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ survey: survey }),
-  });
+  try {
+    const response = await fetch("/api/surveys/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ survey: survey }),
+    });
 
-  return await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Network error:", error);
+    throw error;
+  }
 }
 
+
 export async function storeResponse(response) {
-  return await fetch("/api/surveys/postResponse", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(response),
-  });
+  try {
+    const res = await fetch("/api/surveys/postResponse", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(response),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(`HTTP error! status: ${res.status} - ${errorData.error}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Network error:", error);
+    throw error;
+  }
 }
 
 export async function deleteSurveyById(id) {

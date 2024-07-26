@@ -4,56 +4,63 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Question from "../components/SurveyPage/Question";
 import NavButton from "../components/SurveyPage/NavButton";
 import { storeResponse } from "../service/BackendService";
+import SidebarMenu from "../components/DashboardPage/SidebarMenu";
 
 function Survey() {
-  var history = useLocation(); //holds the routing history and has funtions to redirect to other routes
-  var navigate = useNavigate();
-  const propsPassedFromLink = history.state 
-  console.log(propsPassedFromLink)
-  var [questionIndex, setQuestionIndex] = useState(0);
-  var questions = propsPassedFromLink.questions;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const propsPassedFromLink = location.state;
+  console.log(propsPassedFromLink);
+
+  const questions = propsPassedFromLink.questions;
   const [selectedOptions, modifySelectedOptions] = useState(
-    new Array(questions.length).fill(null)
+    questions.map(() => [])
   );
 
-  const QuestionList = questions.map((question, questionIndex) => {
+  const QuestionList = questions.map((question, index) => {
     return (
-    <Question
+      <Question
+        key={index}
         source={question}
-        questionIndex={questionIndex}
+        questionIndex={index}
         markAnswer={markAnswer}
+        selectedOptions={selectedOptions[index]}
       />
-    )
-  })
+    );
+  });
 
   function submitSurvey() {
-    var response = {
+    const response = {
       title: propsPassedFromLink.title,
       responseID: generateId(),
       answers: selectedOptions,
       surveyID: propsPassedFromLink.id,
     };
-
+  
     storeResponse(response)
-      .then((data) => console.log(data))
-      .catch((e) => console.log(e));
-
+      .then((data) => console.log("Response stored:", data))
+      .catch((e) => console.error("Error storing response:", e));
+  
     navigate("/submission");
   }
 
-  function markAnswer(selectedOptionID) {
-    modifySelectedOptions(function () {
-      selectedOptions[questionIndex] = selectedOptionID;
-      return selectedOptions;
+  function markAnswer(index, answers) {
+    modifySelectedOptions((prevSelectedOptions) => {
+      const newSelections = [...prevSelectedOptions];
+      newSelections[index] = answers;
+      return newSelections;
     });
   }
 
   return (
-    <div style={{marginLeft: '200px',marginTop: '20px'}}>
-      <h2>{history.state.title}</h2>
-      {QuestionList}
-      <NavButton onClick={submitSurvey} title="Submit" />
-    </div>
+    <>
+      <SidebarMenu />
+      <div style={{ marginLeft: "200px", marginTop: "20px" }}>
+        <h2>{location.state.title}</h2>
+        {QuestionList}
+        <NavButton onClick={submitSurvey} title="Submit" />
+      </div>
+    </>
   );
 }
 
