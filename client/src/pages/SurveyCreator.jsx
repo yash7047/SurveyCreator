@@ -6,25 +6,26 @@ import { v4 as generateId } from "uuid";
 import { useNavigate } from "react-router-dom";
 
 function SurveyCreator() {
-  var history = useNavigate();
+  const navigate = useNavigate(); // Updated from var to const
   const [title, setTitle] = useState("");
-  var [questionList, setQuestionListN] = useState([]);
+  const [questionList, setQuestionList] = useState([]); // Updated from var to const
 
-  function addQuestionCreator() {
-    setQuestionListN([
+  const addQuestionCreator = () => {
+    setQuestionList([
       ...questionList,
       {
         title: "",
         options: [],
+        type: "single",
       },
     ]);
-  }
+  };
 
-  function submitSurvey() {
-    if(questionList.length == 0) {
+  const submitSurvey = () => {
+    if (questionList.length === 0 || title.length === 0) {
       return;
     }
-    var createdSurvey = {
+    const createdSurvey = {
       _id: generateId(),
       title: title,
       questions: questionList,
@@ -32,16 +33,16 @@ function SurveyCreator() {
     storeSurvey(createdSurvey)
       .then((data) => {
         console.log(data);
+        navigate("/dashboard");
       })
       .catch((e) => {
         console.log(e);
       });
-      history("/dashboard");
-  }
+  };
 
-  function handleTitleChange(event) {
+  const handleTitleChange = (event) => {
     setTitle(event.target.value);
-  }
+  };
 
   return (
     <div className="SurveyCreator">
@@ -56,14 +57,24 @@ function SurveyCreator() {
           className="form-control"
           id="surveyTitle"
           onChange={handleTitleChange}
-        ></input>
+          value={title} // Added value to synchronize state
+        />
       </div>
 
       {questionList.map((question, index) => (
-        <QuestionCreator key={index} question={question} />
+        <QuestionCreator
+          key={index}
+          index={index}
+          question={question}
+          setQuestionList={setQuestionList}
+        />
       ))}
-      <button className="btn btn-info addQuestionCreatorButton" onClick={addQuestionCreator}>
-        <FaPlus /><span>Add</span>
+      <button
+        className="btn btn-info addQuestionCreatorButton"
+        onClick={addQuestionCreator}
+      >
+        <FaPlus />
+        <span>Add</span>
       </button>
       <button className="submitButton btn btn-outline-success" onClick={submitSurvey}>
         Submit

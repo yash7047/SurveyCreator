@@ -1,62 +1,95 @@
-import { useState } from "react";
-import OptionCreator from "../../components/SurveyCreator/OptionCreator";
+import React, { useState } from "react";
 
-function QuestionCreator(props) {
-  var [noOfOptions, setNoOfOptions] = useState(1);
+const QuestionCreator = ({ question, index, setQuestionList }) => {
+  const [questionTitle, setQuestionTitle] = useState(question.title || "");
+  const [questionType, setQuestionType] = useState(question.type || "single");
+  const [options, setOptions] = useState(question.options || [""]);
 
-  function handleTitleChange(event) {
-    props.question.title = event.target.value;
-  }
+  const handleQuestionTitleChange = (e) => {
+    setQuestionTitle(e.target.value);
+    updateQuestion("title", e.target.value);
+  };
 
-  function handleChangeInNoOfOptions(event) {
-    setNoOfOptions(event.target.value);
-  }
+  const handleQuestionTypeChange = (e) => {
+    setQuestionType(e.target.value);
+    updateQuestion("type", e.target.value);
+  };
 
-  function getOptionCreators(number) {
-    var optionsList = [];
-    for (var i = 0; i < number; i++) {
-      optionsList.push(
-        <OptionCreator key={i} index={i} onChange={handleOptionChange} />
-      );
-    }
-    return optionsList;
-  }
+  const handleOptionChange = (optionIndex, newValue) => {
+    const newOptions = options.map((opt, idx) =>
+      idx === optionIndex ? newValue : opt
+    );
+    setOptions(newOptions);
+    updateQuestion("options", newOptions);
+  };
 
-  function handleOptionChange(event) {
-    props.question.options[event.target.id] = event.target.value;
-  }
+  const handleAddOption = () => {
+    const newOptions = [...options, ""];
+    setOptions(newOptions);
+    updateQuestion("options", newOptions);
+  };
+
+  const handleRemoveOption = (optionIndex) => {
+    const newOptions = options.filter((_, idx) => idx !== optionIndex);
+    setOptions(newOptions);
+    updateQuestion("options", newOptions);
+  };
+
+  const updateQuestion = (field, value) => {
+    setQuestionList((prevList) =>
+      prevList.map((q, idx) =>
+        idx === index ? { ...q, [field]: value } : q
+      )
+    );
+  };
 
   return (
-    <div className="QuestionCreator">
-      <form>
-        <div className="questionTitle">
-          <label htmlFor="questionTitle" className="form-label">
-            Question
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="questionTitle"
-            onChange={handleTitleChange}
-          ></input>
-        </div>
-        <div className="Options">
-          <label htmlFor="noOfOptions">No of Options:</label>
-          <input
-            id="noOfOptions"
-            type="number"
-            className="input-group"
-            min="1"
-            max="15"
-            value={noOfOptions}
-            onChange={handleChangeInNoOfOptions}
-          ></input>
-        </div>
+    <div className="questionCreator">
+      <h3>Question {index + 1}</h3>
+      <div>
+        <label>Question Title:</label>
+        <input
+          type="text"
+          value={questionTitle}
+          onChange={handleQuestionTitleChange}
+          required
+        />
+      </div>
 
-        {getOptionCreators(noOfOptions)}
-      </form>
+      <div>
+        <label>Question Type:</label>
+        <select value={questionType} onChange={handleQuestionTypeChange}>
+          <option value="single">Single Choice</option>
+          <option value="multiple">Multiple Choice</option>
+          <option value="comment">Comment</option>
+        </select>
+      </div>
+
+      {(questionType === "single" || questionType === "multiple") && (
+        <div>
+          <label>Options:</label>
+          {options.map((option, idx) => (
+            <div key={idx}>
+              <input
+                type="text"
+                value={option}
+                onChange={(e) => handleOptionChange(idx, e.target.value)}
+                required
+              />
+              {options.length > 1 && (
+                <button type="button" onClick={() => handleRemoveOption(idx)}>
+                  Remove
+                </button>
+              )}
+            </div>
+          ))}
+          <button type="button" onClick={handleAddOption}>
+            Add Option
+          </button>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default QuestionCreator;

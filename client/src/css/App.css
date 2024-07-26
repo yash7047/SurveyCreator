@@ -11,7 +11,7 @@ code {
     monospace;
 }
 th, tr {text-align: center;}
-
+ul {list-style: none;}
 .App {
   text-align: center;
 }
@@ -102,7 +102,6 @@ hr {
 .addQuestionCreatorButton {
   margin: 5px;
   height: 50px;
-  width: 100px;
   background-color: rgba(7, 0, 31, 0.932);
   color: white;
 }
@@ -126,6 +125,13 @@ hr {
 .Question h3 {
   text-align: left;
   padding: 0.5em 0;
+}
+.question {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
 /******Option********/
