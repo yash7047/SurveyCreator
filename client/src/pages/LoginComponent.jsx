@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState} from 'react';
+import { Form, Button} from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import authenticatorClient from '../service/authenticator-api-client';
 
@@ -66,7 +66,7 @@ const LoginComponent = ({ state, updateLoginCred }) => {
 
     return (
         <div className='row'>
-            <h1 className="text-primary text-center">Login/SignUp</h1>
+            <h1 className="text-primary text-center" style={{padding: "16px"}}>Login / SignUp</h1>
 
             {message && <h4 className="alert alert-danger">{message}</h4>}
 

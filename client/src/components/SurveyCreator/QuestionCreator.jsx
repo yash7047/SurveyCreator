@@ -77,13 +77,13 @@ const QuestionCreator = ({ question, index, setQuestionList }) => {
                 required
               />
               {options.length > 1 && (
-                <button type="button" onClick={() => handleRemoveOption(idx)}>
+                <button type="button" style={{margin: "12px"}} onClick={() => handleRemoveOption(idx)}>
                   Remove
                 </button>
               )}
             </div>
           ))}
-          <button type="button" onClick={handleAddOption}>
+          <button type="button" onClick={handleAddOption}  style={{margin: "12px"}} >
             Add Option
           </button>
         </div>
