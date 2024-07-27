@@ -5,7 +5,7 @@ function ResultUI(props) {
 
   return (
     <div>
-      <h1>{survey.survey.title}</h1>
+      <h1>Here are the results for the survey <span style={{color:"#007bff"}}>{survey.survey.title}</span></h1>
       {survey.survey.questions.map((question, index) => {
         return (
           <QuestionResult

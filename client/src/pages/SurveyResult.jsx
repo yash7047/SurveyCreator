@@ -22,7 +22,6 @@ function SurveyResult(props) {
     <>
       <SidebarMenu />
       <div style={{ marginLeft: "200px", marginTop: "20px" }}>
-        <h1>Here are the results...</h1>
         <div>
           {result ? (
             <ResultUI survey={location.state} results={result} />

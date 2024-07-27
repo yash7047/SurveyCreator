@@ -118,15 +118,34 @@ surveys.get("/generateResults", function(req, res) {
 
 function generateResult(survey) {
   var results = [];
-  survey.questions.forEach((question, index) => {
-    var result = new Array(question.options.length).fill(0);
 
-    survey.responses.forEach((response) => {
-      result[response[index]] += 1;
-    });
-    results.push(result);
+  survey.questions.forEach((question, index) => {
+    if (question.type === "comment") {
+      // For comment-type questions, collect comments
+      var comments = survey.responses.map((response) => response[index]);
+      results.push(comments);
+    } else {
+      // For single-choice and multiple-choice questions, initialize the result array
+      var result = new Array(question.options.length).fill(0);
+
+      survey.responses.forEach((response) => {
+        const answer = response[index];
+        if (question.type === "multiple") {
+          // For multiple-choice questions, answer is an array of indices
+          answer.forEach((optionIndex) => {
+            result[optionIndex] += 1;
+          });
+        } else if (question.type === "single") {
+          // For single-choice questions, answer is a single index
+          result[answer] += 1;
+        }
+      });
+
+      results.push(result);
+    }
   });
-  console.log(results)
+
+  console.log(results);
   return results;
 }
 

@@ -8,13 +8,13 @@ function QuestionResult(props) {
 
   return (
     <div className="QuestionResult">
-      <h2 className="QuestionTitle">{question.title}</h2>
+      <h4 className="QuestionTitle">{question.title}</h4>
 
       {question.type !== "comment" ? (
         // Handle multiple-choice and single-choice options
         question.options.map((option, index) => (
           <div key={index}>
-            <h3 className="Choices">{option}</h3>
+            <h4 className="Choices">{option}</h4>
             <ProgressBar
               bgcolor="blue"
               progress={(result[index] / totalResponses) * 100}
@@ -24,7 +24,7 @@ function QuestionResult(props) {
       ) : (
         // Handle comments
         <div>
-          <h3 className="Choices">Comments:</h3>
+          <h6 style={{fontStyle: 'italic'}}>Following are the comments replied by users on this question:</h6>
           {result.map((comment, index) => (
             <div key={index} className="Comment">
               <p>{comment}</p>

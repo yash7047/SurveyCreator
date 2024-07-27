@@ -4,21 +4,17 @@ import Option from "./Option";
 function Question(props) {
   const { source, questionIndex, markAnswer, selectedOptions } = props;
 
-  function clearSelection() {
-    markAnswer(questionIndex, []);
-  }
-
   function changeSelection(optionIndex) {
-    const newSelections = [...selectedOptions];
+    let newSelections = [...selectedOptions];
 
     if (source.type === "multiple") {
       if (newSelections.includes(optionIndex)) {
-        newSelections.splice(newSelections.indexOf(optionIndex), 1);
+        newSelections = newSelections.filter((index) => index !== optionIndex);
       } else {
         newSelections.push(optionIndex);
       }
     } else {
-      newSelections[0] = optionIndex; // For single choice, only one selection is allowed
+      newSelections = [optionIndex]; // For single choice, only one selection is allowed
     }
 
     markAnswer(questionIndex, newSelections);
@@ -30,8 +26,8 @@ function Question(props) {
 
   return (
     <div className="Question">
-      <h2>Question {questionIndex + 1}</h2>
-      <h3>{source.title}</h3>
+      <h4>Question {questionIndex + 1}</h4>
+      <h4>{source.title}</h4>
 
       {source.type === "comment" ? (
         <textarea
@@ -43,11 +39,11 @@ function Question(props) {
         />
       ) : (
         <div>
-          <p>
+          <h6 style={{fontWeight: 'normal'}}>
             {source.type === "multiple"
               ? "Select one or more options:"
               : "Select one option:"}
-          </p>
+          </h6>
           {source.options.map((option, index) => (
             <Option
               key={index}

@@ -29,21 +29,6 @@ function Survey() {
     );
   });
 
-  function submitSurvey() {
-    const response = {
-      title: propsPassedFromLink.title,
-      responseID: generateId(),
-      answers: selectedOptions,
-      surveyID: propsPassedFromLink.id,
-    };
-  
-    storeResponse(response)
-      .then((data) => console.log("Response stored:", data))
-      .catch((e) => console.error("Error storing response:", e));
-  
-    navigate("/submission");
-  }
-
   function markAnswer(index, answers) {
     modifySelectedOptions((prevSelectedOptions) => {
       const newSelections = [...prevSelectedOptions];
@@ -52,11 +37,50 @@ function Survey() {
     });
   }
 
+  function validateAnswers() {
+    // Check if each question has been answered appropriately
+    for (let i = 0; i < questions.length; i++) {
+      const question = questions[i];
+      const answer = selectedOptions[i];
+
+      if (question.type === "comment") {
+        if (!answer[0] || answer[0].trim() === "") {
+          return false; // Comment question not answered
+        }
+      } else {
+        if (answer.length === 0) {
+          return false; // No option selected for single or multiple-choice
+        }
+      }
+    }
+    return true; // All questions have been answered
+  }
+
+  function submitSurvey() {
+    if (!validateAnswers()) {
+      alert("Please answer all questions before submitting.");
+      return;
+    }
+
+    const response = {
+      title: propsPassedFromLink.title,
+      responseID: generateId(),
+      answers: selectedOptions,
+      surveyID: propsPassedFromLink.id,
+    };
+
+    storeResponse(response)
+      .then((data) => console.log(data))
+      .catch((e) => console.log(e));
+
+    navigate("/submission");
+  }
+
   return (
     <>
       <SidebarMenu />
       <div style={{ marginLeft: "200px", marginTop: "20px" }}>
-        <h2>{location.state.title}</h2>
+        <h3>{location.state.title}</h3>
         {QuestionList}
         <NavButton onClick={submitSurvey} title="Submit" />
       </div>
