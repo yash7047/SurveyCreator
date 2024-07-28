@@ -23,13 +23,17 @@ function SurveyCreator() {
         (lastQuestion.type === "single" || lastQuestion.type === "multiple") &&
         lastQuestion.options.length === 0
       ) {
-        alert("Please add options to the previous question before adding a new one.");
+        alert(
+          "Please fill necessary fields first before adding a new one."
+        );
         return;
       }
 
       // Check if the last question has a title for comment type questions
       if (lastQuestion.type === "comment" && lastQuestion.title.trim() === "") {
-        alert("Please add a question title for the comment type before adding a new one.");
+        alert(
+          "Please add a question title for the comment type before adding a new one."
+        );
         return;
       }
     }
@@ -101,21 +105,31 @@ function SurveyCreator() {
             setQuestionList={setQuestionList}
           />
         ))}
-        <button
-          className="btn btn-info addQuestionCreatorButton"
-          onClick={addQuestionCreator}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
         >
-          <FaPlus />
-          <span>Add</span>
-        </button>
-        {questionList.length !== 0 && (
           <button
-            className="submitButton btn btn-outline-success"
-            onClick={submitSurvey}
+            className="btn btn-info addQuestionCreatorButton"
+            onClick={addQuestionCreator}
           >
-            Submit
+            <FaPlus />
+            <span>Add</span>
           </button>
-        )}
+          {questionList.length !== 0 && (
+            <button
+              style={{ marginTop: "15px" }}
+              className="submitButton btn btn-outline-success"
+              onClick={submitSurvey}
+            >
+              Submit
+            </button>
+          )}
+        </div>
 
         {/* Custom Modal */}
         <CustomModal
