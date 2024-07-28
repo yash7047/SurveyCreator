@@ -39,8 +39,8 @@ function SurveyTable() {
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
+            <th scope="col">S.No</th>
+            <th scope="col">Survey Title</th>
             <th scope="col">Respondents</th>
             <th scope="col">Actions</th>
           </tr>
