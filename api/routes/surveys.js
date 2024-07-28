@@ -117,29 +117,49 @@ surveys.get("/generateResults", function(req, res) {
 })
 
 function generateResult(survey) {
-  var results = [];
+  const results = [];
 
+  // Check if survey and its properties exist
+  if (!survey || !survey.questions || !Array.isArray(survey.questions)) {
+    console.error("Invalid survey data");
+    return results; // Return empty results in case of invalid data
+  }
+
+  // Iterate through each question in the survey
   survey.questions.forEach((question, index) => {
     if (question.type === "comment") {
       // For comment-type questions, collect comments
-      var comments = survey.responses.map((response) => response[index]);
+      const comments = survey.responses
+        ? survey.responses.map((response) => response[index]).filter(comment => comment !== undefined && comment !== null)
+        : [];
       results.push(comments);
     } else {
       // For single-choice and multiple-choice questions, initialize the result array
-      var result = new Array(question.options.length).fill(0);
+      const result = new Array(question.options.length).fill(0);
 
-      survey.responses.forEach((response) => {
-        const answer = response[index];
-        if (question.type === "multiple") {
-          // For multiple-choice questions, answer is an array of indices
-          answer.forEach((optionIndex) => {
-            result[optionIndex] += 1;
-          });
-        } else if (question.type === "single") {
-          // For single-choice questions, answer is a single index
-          result[answer] += 1;
-        }
-      });
+      // Process responses if they exist
+      if (survey.responses && Array.isArray(survey.responses)) {
+        survey.responses.forEach((response) => {
+          const answer = response[index];
+          if (answer !== undefined && answer !== null) {
+            if (question.type === "multiple") {
+              // For multiple-choice questions, answer is an array of indices
+              if (Array.isArray(answer)) {
+                answer.forEach((optionIndex) => {
+                  if (optionIndex >= 0 && optionIndex < result.length) {
+                    result[optionIndex] += 1;
+                  }
+                });
+              }
+            } else if (question.type === "single") {
+              // For single-choice questions, answer is a single index
+              if (answer >= 0 && answer < result.length) {
+                result[answer] += 1;
+              }
+            }
+          }
+        });
+      }
 
       results.push(result);
     }
@@ -148,5 +168,6 @@ function generateResult(survey) {
   console.log(results);
   return results;
 }
+
 
 module.exports = surveys;
