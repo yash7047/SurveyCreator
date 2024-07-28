@@ -80,9 +80,9 @@ function SurveyCreator() {
         <FaPlus />
         <span>Add</span>
       </button>
-      <button className="submitButton btn btn-outline-success" onClick={submitSurvey}>
+      {questionList.length != 0 && <button className="submitButton btn btn-outline-success" onClick={submitSurvey}>
         Submit
-      </button>
+      </button>}
     </div>
     </>
   );

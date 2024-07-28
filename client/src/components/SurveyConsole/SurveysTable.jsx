@@ -17,7 +17,7 @@ function SurveysTable(props) {
             <SurveyTableRow
             index={index+1}
             title={survey.title}
-            respondents={survey.responses.length}
+            respondents={survey.responses ? survey.responses.length : 0}
             survey={survey}
           />)
         }

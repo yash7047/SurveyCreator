@@ -10,7 +10,7 @@ function SurveysList(props) {
             key={index}
             title={survey.title}
             questions={survey.questions}
-            respondents={survey.responses.length}
+            respondents={survey.responses ? survey.responses.length : 0}
             id={survey._id}
           />
         );
