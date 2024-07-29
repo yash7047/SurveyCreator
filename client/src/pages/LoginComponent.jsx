@@ -47,11 +47,11 @@ const LoginComponent = ({ state, updateLoginCred }) => {
 
         switch (fieldName) {
             case 'username':
-                usernameValidTemp = value.length >= 6;
+                usernameValidTemp = value.length >= 4;
                 fieldValidationErrors.username = usernameValidTemp ? '' : 'Username is invalid';
                 break;
             case 'password':
-                passwordValidTemp = value.length >= 6;
+                passwordValidTemp = value.length >= 4;
                 fieldValidationErrors.password = passwordValidTemp ? '' : 'Password is too short';
                 break;
             default:

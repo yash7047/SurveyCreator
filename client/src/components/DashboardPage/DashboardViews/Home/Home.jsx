@@ -20,7 +20,7 @@ function Home({ loginCred }) {
     <div className="Home">
       <div>
         <h1 className="HomePageHeading">Surveys you might like</h1>
-        {loginCred.username == "manish" && <Link to="/create-survey">
+        {loginCred.username == "Ashok" && <Link to="/create-survey">
           <button className="btn btn-large addSurveybtn">Add Survey</button>
         </Link>}
       </div>
