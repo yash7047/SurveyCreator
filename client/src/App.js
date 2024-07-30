@@ -28,31 +28,29 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Header loginCred={loginCred} />
-      <div className="body">
-        <Router>
+    
+      <div className="App">
+        <Header loginCred={loginCred} updateLoginCred={updateLoginCred} />
+        <div className="body">
+          <Router>
+            <Routes>
+              {/* Redirect from "/" to "/dashboard" */}
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+              {/* Use element instead of component */}
+              <Route path="/dashboard" element={<SecuredRoute><UserDashboard loginCred={loginCred} /></SecuredRoute>} />
+              <Route path="/survey-console" element={<SurveyConsole />} />
+              <Route path="/survey" element={<Survey loginCred={loginCred} />} />
+              <Route path="/create-survey" element={<SurveyCreator />} />
+              <Route path="/survey-result" element={<SurveyResult />} />
+              <Route path="/submission" element={<SubmissionPage loginCred={loginCred} />} />
+
+              <Route path="login" element={<LoginComponent updateLoginCred={updateLoginCred} />} />
+            </Routes>
+          </Router>
           
-          <Routes>
-            {/* Redirect from "/" to "/dashboard" */}
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-
-            {/* Use element instead of component */}
-            <Route path="/dashboard" element={<SecuredRoute><UserDashboard loginCred={loginCred} /></SecuredRoute>} />
-            <Route path="/survey-console" element={<SurveyConsole />} />
-            <Route path="/survey" element={<Survey loginCred={loginCred} />} />
-            <Route path="/create-survey" element={<SurveyCreator />} />
-            <Route path="/survey-result" element={<SurveyResult />} />
-            <Route path="/submission" element={<SubmissionPage />} />
-
-            {/* Secure route example */}
-            {/* <Route path="/admin" element={<SecuredRoute><AdminComponent /></SecuredRoute>} /> */}
-
-            <Route path="login" element={<LoginComponent updateLoginCred={updateLoginCred} />} />
-          </Routes>
-        </Router>
+        </div>
       </div>
-    </div>
   );
 }
 

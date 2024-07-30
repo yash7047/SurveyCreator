@@ -284,3 +284,14 @@ hr {
   background-color: rgba(7, 0, 31, 0.932);
   color: white;
 }
+.logout_span {
+  border: 1px solid black;
+  top: 30px;
+  position: absolute;
+  right: -15px;
+  font-size: 20px;
+  background: white;
+  padding: 0px 10px;
+  cursor: pointer;
+  color: black;
+}

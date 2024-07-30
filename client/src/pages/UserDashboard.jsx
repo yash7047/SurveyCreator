@@ -5,7 +5,7 @@ import SidebarMenu from "../components/DashboardPage/SidebarMenu";
 function UserDashboard({ loginCred }) {
   return (
     <>
-        <SidebarMenu />
+        <SidebarMenu loginCred={loginCred} />
         <div className="UserDashboard">
           <div className="DashboardView">
             <Home loginCred={loginCred} />

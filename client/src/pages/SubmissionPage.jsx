@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 
-function SubmissionPage() {
+function SubmissionPage({ loginCred }) {
+
   return (
     <div>
       <h1 className="thankyou-text">Thank You</h1>
       <p>
-        Thank you so much for taking the time out of your day to complete our
+        Thank you <strong>{loginCred.username}</strong> for taking the time out of your day to complete our
         short survey.We highly appreciate it <br /> Your suggestion really makes
         a difference. Please do participate in such surveys in future as well.
       </p>
