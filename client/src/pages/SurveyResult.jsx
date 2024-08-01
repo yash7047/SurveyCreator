@@ -20,7 +20,7 @@ function SurveyResult(props) {
 
   return (
     <>
-      <SidebarMenu />
+      <SidebarMenu loginCred={props.loginCred} />
       <div style={{ marginLeft: "200px", marginTop: "20px" }}>
         <div>
           {result ? (

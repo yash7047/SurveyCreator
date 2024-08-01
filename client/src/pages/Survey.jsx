@@ -6,7 +6,7 @@ import NavButton from "../components/SurveyPage/NavButton";
 import { storeResponse } from "../service/BackendService";
 import SidebarMenu from "../components/DashboardPage/SidebarMenu";
 
-function Survey() {
+function Survey({ loginCred }) {
   const location = useLocation();
   const navigate = useNavigate();
   const propsPassedFromLink = location.state;
@@ -78,7 +78,7 @@ function Survey() {
 
   return (
     <>
-      <SidebarMenu />
+      <SidebarMenu loginCred={loginCred} />
       <div style={{ marginLeft: "200px", marginTop: "20px" }}>
         <h3>{location.state.title}</h3>
         {QuestionList}

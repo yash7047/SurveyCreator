@@ -39,10 +39,10 @@ function App() {
 
               {/* Use element instead of component */}
               <Route path="/dashboard" element={<SecuredRoute><UserDashboard loginCred={loginCred} /></SecuredRoute>} />
-              <Route path="/survey-console" element={<SurveyConsole />} />
+              <Route path="/survey-console" element={<SurveyConsole loginCred={loginCred} />} />
               <Route path="/survey" element={<Survey loginCred={loginCred} />} />
-              <Route path="/create-survey" element={<SurveyCreator />} />
-              <Route path="/survey-result" element={<SurveyResult />} />
+              <Route path="/create-survey" element={<SurveyCreator loginCred={loginCred} />} />
+              <Route path="/survey-result" element={<SurveyResult loginCred={loginCred} />} />
               <Route path="/submission" element={<SubmissionPage loginCred={loginCred} />} />
 
               <Route path="login" element={<LoginComponent updateLoginCred={updateLoginCred} />} />

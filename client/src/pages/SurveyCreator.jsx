@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import SidebarMenu from "../components/DashboardPage/SidebarMenu";
 import CustomModal from "../components/CustomModal";
 
-function SurveyCreator() {
+function SurveyCreator({ loginCred }) {
   const navigate = useNavigate(); // Updated from var to const
   const [title, setTitle] = useState("");
   const [questionList, setQuestionList] = useState([]); // Updated from var to const
@@ -80,7 +80,7 @@ function SurveyCreator() {
 
   return (
     <>
-      <SidebarMenu />
+      <SidebarMenu loginCred={loginCred} />
       <div className="SurveyCreator">
         <h1>You are at Survey Creator page</h1>
 
