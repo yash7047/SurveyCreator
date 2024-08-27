@@ -25,7 +25,7 @@ function Header({ loginCred, updateLoginCred }) {
         alignItems: "center",
       }}
     >
-      <h1>Survey Creator</h1>
+      <h1>Survey Project</h1>
       {loginCred.username != "" && (
         <DropdownButton
           style={{ marginRight: "2%" }}

@@ -57,11 +57,11 @@ const QuestionCreator = ({ question, index, setQuestionList }) => {
       </div>
 
       <div>
-        <label>Question Type:</label>
+        <label>Option Type:</label>
         <select value={questionType} onChange={handleQuestionTypeChange}>
           <option value="single">Single Choice</option>
           <option value="multiple">Multiple Choice</option>
-          <option value="comment">Comment</option>
+          <option value="comment">Paragraph/Short Answer</option>
         </select>
       </div>
 
